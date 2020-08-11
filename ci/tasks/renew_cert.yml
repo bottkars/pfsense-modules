@@ -1,0 +1,24 @@
+---
+# this simple tasksm get´s running vm´s of an azurestack subscription
+platform: linux
+
+inputs:
+ - name: pfsense_modules
+outputs:
+ - name: certificates
+params:
+  SUBJECT:
+  CERT_ID:
+  CA_ID:
+  STORED_CERT:
+  CREDHUB_CLIENT:
+  CREDHUB_SECRET:
+  CREDHUB_SERVER:
+  CREDHUB_CA_CERT:  
+  PFSENSE_FQDN: 
+  PFSENSE_USERNAME: 
+  PFSENSE_PASSWORD: 
+
+
+run:
+  path: pfsense_modules/ci/scripts/request_cert.sh
