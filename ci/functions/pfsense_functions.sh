@@ -71,11 +71,11 @@ function get_pfsense_acme_cert {
 
             certdate=$(echo $(date --date="$(openssl x509 -enddate -noout -in $id.pem|cut -d= -f 2)" --iso-8601))
             certsubject=$(openssl x509 -noout -subject -nameopt multiline -in $id.pem| sed -n 's/ *commonName *= //p' )
-            mv $id.key $certsubject-$certdate.key
-            mv $id.pem $certsubject-$certdate.pem
+            mv $id.key $certsubject-${certdate//-/.}.key
+            mv $id.pem $certsubject-${certdate//-/.}.pem
             echo "Certificate on pfsense for $certsubject is valid until $certdate" 
-            echo "storing key as $certsubject-$certdate.key"    
-            echo "storing Certificate as $certsubject-$certdate.pem"   
+            echo "storing key as $certsubject-${certdate//-/.}.key"    
+            echo "storing Certificate as $certsubject-${certdate//-/.}.pem"   
 }
 
 
@@ -92,7 +92,7 @@ function get_pfsense_acme_root {
                 "https://${PFSENSE_FQDN}/${endpoint}" > ca.cer
             certdate=$(echo $(date --date="$(openssl x509 -enddate -noout -in ca.cer | cut -d= -f 2)" --iso-8601))
             certsubject=$(openssl x509 -noout -subject -nameopt multiline -in ca.cer| sed -n 's/ *commonName *= //p' )
-            echo "Certificate on pfsense for CA ${certsubject} is valid until ${certdate}" 
+            echo "Certificate on pfsense for CA ${certsubject} is valid until ${certdate//-/.}" 
 
 }
 
