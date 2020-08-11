@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 set -x
 source pfsense_modules/ci/functions/pfsense_functions.sh
 
