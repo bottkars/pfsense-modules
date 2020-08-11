@@ -8,12 +8,11 @@ inputs:
 outputs:
  - name: certificates
 params:
-  INSTANT_FILE: $vmName-$REF_VERSION.json
-  GOVC_INSECURE: 
-  GOVC_PASSWORD: 
-  GOVC_URL: 
-  GOVC_USERNAME: 
-  PROXY_FILE:
+  SUBJECT:
+  PFSENSE_FQDN: 
+  PFSENSE_USERNAME: 
+  PFSENSE_PASSWORD: 
+
 
 run:
-  path: pfsense_modules/ci/scripts/ppdm-vm-instant-access.sh
+  path: pfsense_modules/ci/scripts/request_cert.sh
