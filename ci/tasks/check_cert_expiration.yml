@@ -13,4 +13,4 @@ params:
 
 
 run:
-  path: pfsense_modules/ci/scripts/check_cert_expiration_cert.sh
+  path: pfsense_modules/ci/scripts/check_cert_expiration.sh
