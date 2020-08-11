@@ -21,4 +21,4 @@ params:
 
 
 run:
-  path: pfsense_modules/ci/scripts/request_cert.sh
+  path: pfsense_modules/ci/scripts/renew_cert.sh

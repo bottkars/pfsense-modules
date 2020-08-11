@@ -101,7 +101,9 @@ function get_pfsense_acme_root {
 function check_cert_expire {
     local days=${2:-15}
     local url=${1:-vmw.pks.home.labbuildr.com:443}
-    openssl x509 -checkend $(( 24*3600*$days )) -noout -in <(openssl s_client -showcerts -connect $url </dev/null 2>/dev/null | openssl x509 -outform PEM)
+    openssl x509 -noout -issuer -subject -dates  -in <(openssl s_client -showcerts -connect $url </dev/null 2>/dev/null | openssl x509 -outform PEM)
+    printf "$(openssl x509 -checkend $(( 24*3600*$days )) -noout -in <(openssl s_client -showcerts -connect $url </dev/null 2>/dev/null | openssl x509 -outform PEM))" 
+    printf " within $days days, "
     if [ $? -eq 0 ]; then
     echo 'good'
     else
