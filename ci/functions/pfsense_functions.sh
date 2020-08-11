@@ -90,6 +90,20 @@ function check_cert_expire {
     fi
 }
 
-#openssl crl2pkcs7 -nocrl -certfile cert.pem | openssl pkcs7 -print_certs -text | grep -E '(Subject:|Not After)'
-#"$(date --date="$(openssl x509 -enddate -noout -in "$pem"|cut -d= -f 2)" --iso-8601)" \
-#      "$id.pem"
+
+
+function renew_pfsense_acme_cert {
+    local subject=${1}
+    local url=${2:-$PFSENSE_FQDN}
+    curl_args=(
+    --cookie cookies.txt 
+    --cookie-jar cookies.txt  
+    -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' 
+    --data-urlencode "id=$subject"
+    --data-urlencode "action=issuecert"
+    --data-urlencode "__csrf_magic=$(head -n 1 csrf.txt)"
+)
+  curl -k -v "https://$url/acme/acme_certificates.php" \
+        "${curl_args[@]}"
+}
+

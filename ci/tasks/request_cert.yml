@@ -1,0 +1,19 @@
+---
+# this simple tasksm get´s running vm´s of an azurestack subscription
+platform: linux
+
+inputs:
+ - name: pfsense_modules
+ - name: variable
+outputs:
+ - name: certificates
+params:
+  INSTANT_FILE: $vmName-$REF_VERSION.json
+  GOVC_INSECURE: 
+  GOVC_PASSWORD: 
+  GOVC_URL: 
+  GOVC_USERNAME: 
+  PROXY_FILE:
+
+run:
+  path: pfsense_modules/ci/scripts/ppdm-vm-instant-access.sh
