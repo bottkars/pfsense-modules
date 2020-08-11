@@ -1,4 +1,4 @@
 *.pem
 *.key
-csfr.txt
+csrf.txt
 cookies.txt
