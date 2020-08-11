@@ -79,6 +79,25 @@ function get_pfsense_acme_cert {
 }
 
 
+
+function get_pfsense_acme_root {
+            local id=${1:-0}
+            local endpoint="system_camanager.php"
+            # refresh_pfsense_token $endpoint
+            echo "Retrieving certificate with id ${id} from https://${PFSENSE_FQDN}/${endpoint}"
+            curl -s -L -k --cookie cookies.txt --cookie-jar cookies.txt \
+                --data-urlencode "act=exp" \
+                --data-urlencode "id=${id}" \
+                --data-urlencode "__csrf_magic=$(head -n 1 csrf.txt)" \
+                "https://${PFSENSE_FQDN}/${endpoint}" > ca.cer
+            certdate=$(echo $(date --date="$(openssl x509 -enddate -noout -in ca.cer | cut -d= -f 2)" --iso-8601))
+            certsubject=$(openssl x509 -noout -subject -nameopt multiline -in ca.cer| sed -n 's/ *commonName *= //p' )
+            echo "Certificate on pfsense for CA ${certsubject} is valid until ${certdate}" 
+
+}
+
+
+
 function check_cert_expire {
     local days=${2:-15}
     local url=${1:-vmw.pks.home.labbuildr.com:443}
