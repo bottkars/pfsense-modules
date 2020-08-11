@@ -12,4 +12,3 @@ credhub set -n /concourse/main/pksdemo/pks_cert -t certificate \
  -p *.key \
  -r  ca.cer
 
-sleep 3000
