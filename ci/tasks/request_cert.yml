@@ -9,6 +9,7 @@ outputs:
 params:
   SUBJECT:
   CERT_ID:
+  CA_ID:
   STORED_CERT:
   CREDHUB_CLIENT:
   CREDHUB_SECRET:
