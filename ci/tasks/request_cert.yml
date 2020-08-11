@@ -4,7 +4,6 @@ platform: linux
 
 inputs:
  - name: pfsense_modules
- - name: variable
 outputs:
  - name: certificates
 params:
