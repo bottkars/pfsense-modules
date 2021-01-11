@@ -3,7 +3,7 @@
 platform: linux
 
 inputs:
- - name: pfsense_modules
+ - name: pfsense-modules
 outputs:
  - name: certificates
 params:
@@ -21,4 +21,4 @@ params:
 
 
 run:
-  path: pfsense_modules/ci/scripts/renew_cert.sh
+  path: pfsense-modules/ci/scripts/renew_cert.sh
